@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071a30">
+  <title>Isabel | El tesoro de los 24 años</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  
+<!-- CHOPPER: COMPAÑERO DE AVENTURA -->
+<div id="chopper-guide" class="chopper-guide">
+  <div id="chopper-bubble" class="chopper-bubble">
+    ¡Hola, Isabel! Soy Chopper.
+    ¡Tengo una aventura preparada para ti!
+  </div>
+
+  <button id="chopper-button"
+          type="button"
+          aria-label="Hablar con Chopper">
+    <img
+      src="assets/personajes/Chopper.png"
+      alt="Chopper"
+    >
+  </button>
+</div>
+
+  <script src="js/juego.js" defer></script>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">✦ ISABEL <small>24</small></div>
+    <div class="top-actions">
+      <span id="counter">✦ 0/5</span>
+      <button id="sound-toggle"
+              type="button"
+              aria-label="Activar o desactivar sonido">
+        ♫
+      </button>
+      <button id="reset"
+              type="button"
+              aria-label="Reiniciar aventura">
+        ↻
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- BIENVENIDA -->
+    <section id="intro" class="screen">
+      <div class="intro-inner">
+        <span class="eyebrow">
+          UNA AVENTURA EXTRAORDINARIA
+        </span>
+        <div class="intro-symbol">✦</div>
+        <h1>ISABEL</h1>
+        <h2>El tesoro de los 24 años</h2>
+        <p>
+          Hay historias escondidas más allá del horizonte.
+          Esta noche, un mapa ha decidido encontrarte.
+        </p>
+        <button class="gold" id="start" type="button">
+          ZARPAR ⛵
+        </button>
+        <span class="intro-note">
+          Una aventura creada especialmente para ti
+        </span>
+      </div>
+    </section>
+
+    <!-- MAPA INTERACTIVO -->
+    <section id="map" class="screen hidden">
+      <div class="heading">
+        <span class="eyebrow">UNA AVENTURA PREPARADA PARA ISABEL</span>
+<h2>La Grand Line de Isabel</h2>
+        <p>
+          Cuatro lugares, cuatro misterios.
+          Explora las islas y descubre lo que esconden.
+        </p>
+      </div>
+
+      <div class="ocean" id="ocean">
+
+        <div class="map-sun"></div>
+        <div class="map-cloud cloud-one"></div>
+        <div class="map-cloud cloud-two"></div>
+
+        <svg class="routes"
+             viewBox="0 0 1000 660"
+             preserveAspectRatio="none"
+             aria-hidden="true">
+          <path
+            d="M170 180 C320 45 500 80 690 185
+               S800 400 660 490
+               S350 550 260 420"/>
+        </svg>
+
+        <button class="island island-a"
+                data-world="dream"
+                type="button">
+          <span class="island-art">🏝️</span>
+          <span class="island-name">Isla del Alba</span>
+          <small>El comienzo de todo</small>
+        </button>
+
+        <button class="island island-b"
+                data-world="stars"
+                type="button">
+          <span class="island-art">🌌</span>
+          <span class="island-name">Constelación Violeta</span>
+          <small>Siete luces</small>
+        </button>
+
+        <button class="island island-c"
+                data-world="stage"
+                type="button">
+          <span class="island-art">🎤</span>
+          <span class="island-name">Bahía de los Ecos</span>
+          <small>Melodías escondidas</small>
+        </button>
+
+        <button class="island island-d"
+                data-world="memory"
+                type="button">
+          <span class="island-art">🏰</span>
+          <span class="island-name">Faro del Tiempo</span>
+          <small>Un secreto espera</small>
+        </button>
+
+        <div class="ship" id="ship" aria-hidden="true">
+  <img src="assets/personajes/sunny-isabel.png" alt="">
+</div>
+
+        <div class="map-compass" aria-hidden="true">
+          ✥<small>N</small>
+        </div>
+      </div>
+
+      <p class="hint" id="map-hint">
+        Selecciona una isla para navegar hacia ella.
+      </p>
+    </section>
+
+    <!-- ESCENARIO DE CADA ISLA -->
+    <section id="world" class="screen hidden">
+
+      <div class="world-top">
+        <button id="back" class="back" type="button">
+          ← Volver al mapa
+        </button>
+        <span id="world-progress"></span>
+      </div>
+
+      <div id="world-scene" class="world-scene">
+        <div class="world-heading">
+          <span class="eyebrow" id="world-label">
+            UN NUEVO DESTINO
+          </span>
+          <h2 id="world-title"></h2>
+          <p id="world-description"></p>
+        </div>
+
+        <div id="play-area"
+             class="play-area"
+             aria-label="Zona interactiva de la misión">
+        </div>
+
+        <div id="world-message"
+             class="message"
+             aria-live="polite">
+        </div>
+      </div>
+    </section>
+
+    <!-- TESORO FINAL -->
+    <section id="end" class="screen hidden">
+      <div class="ending">
+        <span class="eyebrow">
+          EL ÚLTIMO CAPÍTULO
+        </span>
+
+        <div class="final-star">✦</div>
+
+        <h2>El verdadero tesoro</h2>
+
+        <p id="ending-message">
+          Has recorrido mares, descubierto estrellas
+          y escuchado ecos de otros tiempos.
+          Pero todavía queda un secreto por revelar.
+        </p>
+
+        <div id="final-content"
+             class="final-content">
+        </div>
+
+        <button id="end-map"
+                class="gold"
+                type="button">
+          Volver al archipiélago
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PERSONAJE GUÍA -->
+  <aside id="guide-panel"
+         class="guide-panel hidden"
+         aria-live="polite">
+
+    <div class="guide-avatar">
+      <img src="assets/chopper.png"
+           alt="Chopper"
+           id="chopper-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="guide-dialogue">
+      <strong>CHOPPER</strong>
+      <p id="guide-text"></p>
+    </div>
+
+    <button id="guide-close"
+            type="button"
+            aria-label="Cerrar diálogo">
+      ×
+    </button>
+  </aside>
+
+  <!-- NOTIFICACIONES -->
+  <div id="toast"
+       class="toast hidden"
+       role="status"
+       aria-live="polite">
+  </div>
+
+</body>
+</html>
